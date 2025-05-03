@@ -1,19 +1,25 @@
 #include <iostream>
-#include "Log.h"
 
 #define LOG(x) std::cout << x << std::endl
 
-void Increment(int& value)
+class Player
 {
-	value++;
-}
+public:
+	int x, y;
+	int speed;
 
+	void Move(int xa, int ya)
+	{
+		x += xa * speed;
+		y += ya * speed;
+	}
+};
 
 int main()
 {
-	int a = 5;
-	Increment(a);
-	LOG(a);
+	Player player;
+	player.x = 5;
+	player.Move(-1, 1);
 	
 	std::cin.get();
 }
