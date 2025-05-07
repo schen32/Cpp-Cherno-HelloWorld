@@ -34,6 +34,16 @@ public:
 		m_arr[index] = val;
 	}
 
+	const T& operator [] (size_t index) const
+	{
+		return m_arr[index];
+	}
+
+	T& operator [] (size_t index)
+	{
+		return m_arr[index];
+	}
+
 	void print() const
 	{
 		for (size_t i = 0; i < m_size; i++)
@@ -46,10 +56,10 @@ public:
 
 int main()
 {
-	DynamicArray<int> myArray(10);
+	DynamicArray<float> myArray(10);
 
-	myArray.set(4, 7);
-	myArray.set(2, 134);
+	myArray[3] = 3.14;
+	myArray[2] = 2.78;
 
 	myArray.print();
 
