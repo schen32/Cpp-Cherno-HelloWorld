@@ -7,8 +7,8 @@ class Student
 	std::string m_lastName = "Last";
 	int m_studentId = 0;
 	float m_gradeAverage = 0;
-public:
 
+public:
 	Student() {}
 	Student(std::string firstName, std::string lastName, int studentId, float gradeAverage)
 		: m_firstName(firstName), m_lastName(lastName)
@@ -31,24 +31,22 @@ public:
 	{
 		return m_lastName;
 	}
+
+	void print() const
+	{
+		std::cout << m_firstName << " " << m_lastName << " ";
+		std::cout << m_studentId << " " << m_gradeAverage << std::endl;
+	}
 };
 
 
 int main()
 {
-	std::vector<int> vec;
-	vec.push_back(42);
-	vec.push_back(10);
-	vec.push_back(28);
-	
-	for (size_t i = 0; i < vec.size(); i++)
-	{
-		std::cout << vec[i] << std::endl;
-	}
-	for (auto& v : vec)
-	{
-		std::cout << v << std::endl;
-	}
+	Student s1;
+	Student s2("Dave", "Churchill", 1, 3.14);
+	const Student s3("Jane", "Doe", 20220001, 99.9);
+
+	s3.print();
 
 	return 0;
 }
