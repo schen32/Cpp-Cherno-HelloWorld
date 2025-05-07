@@ -10,7 +10,7 @@ class Student
 
 public:
 	Student() {}
-	Student(std::string firstName, std::string lastName, int studentId, float gradeAverage)
+	Student(const std::string& firstName, const std::string& lastName, int studentId, float gradeAverage)
 		: m_firstName(firstName), m_lastName(lastName)
 		, m_studentId(studentId), m_gradeAverage(gradeAverage)
 	{}
@@ -23,11 +23,11 @@ public:
 	{
 		return m_studentId;
 	}
-	std::string getFirst() const
+	const std::string& getFirst() const
 	{
 		return m_firstName;
 	}
-	std::string getLast() const
+	const std::string& getLast() const
 	{
 		return m_lastName;
 	}
@@ -39,14 +39,50 @@ public:
 	}
 };
 
+class Course
+{
+	std::string m_name = "Course";
+	std::vector<Student> m_students;
+
+public:
+	Course() {}
+	Course(const std::string& name)
+		: m_name(name)
+	{}
+
+	void addStudent(const Student& s)
+	{
+		m_students.push_back(s);
+	}
+
+	const std::vector<Student>& getStudents() const
+	{
+		return m_students;
+	}
+
+	void print() const
+	{
+		for (const auto& s : m_students)
+		{
+			s.print();
+		}
+	}
+};
+
 
 int main()
 {
 	Student s1;
 	Student s2("Dave", "Churchill", 1, 3.14);
-	const Student s3("Jane", "Doe", 20220001, 99.9);
+	Student s3("Jane", "Doe", 20220001, 99.9);
 
-	s3.print();
+	Course comp4300("COMP 4300");
+	comp4300.addStudent(s1);
+	comp4300.addStudent(s2);
+	comp4300.addStudent(s3);
+	comp4300.addStudent(Student("Billy", "Bob", 3, 50));
+
+	comp4300.print();
 
 	return 0;
 }
