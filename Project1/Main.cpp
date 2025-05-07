@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 class Student
 {
@@ -60,6 +61,20 @@ public:
 		return m_students;
 	}
 
+	void loadFromFile(const std::string& filename)
+	{
+		std::ifstream fin(filename);
+		std::string first, last;
+		int id;
+		float avg;
+
+		while (fin >> first)
+		{
+			fin >> last >> id >> avg;
+			addStudent(Student(first, last, id, avg));
+		}
+	}
+
 	void print() const
 	{
 		for (const auto& s : m_students)
@@ -72,17 +87,10 @@ public:
 
 int main()
 {
-	Student s1;
-	Student s2("Dave", "Churchill", 1, 3.14);
-	Student s3("Jane", "Doe", 20220001, 99.9);
 
-	Course comp4300("COMP 4300");
-	comp4300.addStudent(s1);
-	comp4300.addStudent(s2);
-	comp4300.addStudent(s3);
-	comp4300.addStudent(Student("Billy", "Bob", 3, 50));
-
-	comp4300.print();
+	Course c("COMP 4300");
+	c.loadFromFile("students.txt");
+	c.print();
 
 	return 0;
 }
